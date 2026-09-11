@@ -2,10 +2,12 @@ package com.sbowling.warmachine.war.batting;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.sbowling.warmachine.model.LeagueStats;
-import com.sbowling.warmachine.model.MetricCalibration;
-import com.sbowling.warmachine.model.PlayerStats;
-import com.sbowling.warmachine.war.batting.impl.BattingAverage;
+import com.sbowling.warmachine.league.model.LeagueStats;
+import com.sbowling.warmachine.war.calibration.model.MetricCalibration;
+import com.sbowling.warmachine.player.model.PlayerStats;
+import com.sbowling.warmachine.war.batting.metric.BattingMetric;
+import com.sbowling.warmachine.war.batting.metric.BattingRunsCalculator;
+import com.sbowling.warmachine.war.batting.metric.impl.BattingAverage;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 

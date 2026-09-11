@@ -1,8 +1,10 @@
 package com.sbowling.warmachine.war.batting;
 
-import com.sbowling.warmachine.war.batting.impl.BattingAverage;
-import com.sbowling.warmachine.war.batting.impl.OnBasePercentage;
-import com.sbowling.warmachine.war.batting.impl.SluggingPercentage;
+import com.sbowling.warmachine.war.batting.metric.BattingMetric;
+import com.sbowling.warmachine.war.batting.metric.BattingMetricRegistry;
+import com.sbowling.warmachine.war.batting.metric.impl.BattingAverage;
+import com.sbowling.warmachine.war.batting.metric.impl.OnBasePercentage;
+import com.sbowling.warmachine.war.batting.metric.impl.SluggingPercentage;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

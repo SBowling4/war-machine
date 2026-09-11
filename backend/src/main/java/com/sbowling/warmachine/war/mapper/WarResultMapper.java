@@ -1,6 +1,6 @@
 package com.sbowling.warmachine.war.mapper;
 
-import com.sbowling.warmachine.model.WarResult;
+import com.sbowling.warmachine.war.model.WarResult;
 import com.sbowling.warmachine.war.dto.WarResponseDto;
 import org.springframework.stereotype.Component;
 

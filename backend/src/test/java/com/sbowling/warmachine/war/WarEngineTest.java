@@ -1,12 +1,12 @@
 package com.sbowling.warmachine.war;
 
-import com.sbowling.warmachine.model.LeagueStats;
-import com.sbowling.warmachine.model.MetricCalibration;
-import com.sbowling.warmachine.model.PlayerStats;
-import com.sbowling.warmachine.model.WarResult;
-import com.sbowling.warmachine.war.batting.BattingMetric;
-import com.sbowling.warmachine.war.batting.BattingRunsCalculator;
-import com.sbowling.warmachine.war.batting.impl.BattingAverage;
+import com.sbowling.warmachine.league.model.LeagueStats;
+import com.sbowling.warmachine.war.calibration.model.MetricCalibration;
+import com.sbowling.warmachine.player.model.PlayerStats;
+import com.sbowling.warmachine.war.model.WarResult;
+import com.sbowling.warmachine.war.batting.metric.BattingMetric;
+import com.sbowling.warmachine.war.batting.metric.BattingRunsCalculator;
+import com.sbowling.warmachine.war.batting.metric.impl.BattingAverage;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

@@ -1,14 +1,14 @@
 package com.sbowling.warmachine.war.service;
 
-import com.sbowling.warmachine.model.LeagueStats;
-import com.sbowling.warmachine.model.MetricCalibration;
-import com.sbowling.warmachine.model.PlayerStats;
-import com.sbowling.warmachine.model.WarResult;
+import com.sbowling.warmachine.league.model.LeagueStats;
+import com.sbowling.warmachine.war.calibration.model.MetricCalibration;
+import com.sbowling.warmachine.player.model.PlayerStats;
+import com.sbowling.warmachine.war.model.WarResult;
 import com.sbowling.warmachine.player.service.PlayerService;
-import com.sbowling.warmachine.service.LeagueService;
+import com.sbowling.warmachine.league.service.LeagueService;
 import com.sbowling.warmachine.war.WarEngine;
-import com.sbowling.warmachine.war.batting.BattingMetric;
-import com.sbowling.warmachine.war.batting.BattingMetricRegistry;
+import com.sbowling.warmachine.war.batting.metric.BattingMetric;
+import com.sbowling.warmachine.war.batting.metric.BattingMetricRegistry;
 import com.sbowling.warmachine.war.dto.WarResponseDto;
 import com.sbowling.warmachine.war.mapper.WarResultMapper;
 import org.springframework.stereotype.Service;
