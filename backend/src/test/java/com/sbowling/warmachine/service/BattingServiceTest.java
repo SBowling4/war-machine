@@ -4,15 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.sbowling.warmachine.model.LeagueStats;
-import com.sbowling.warmachine.model.MetricCalibration;
-import com.sbowling.warmachine.model.PlayerStats;
+import com.sbowling.warmachine.league.service.LeagueService;
+import com.sbowling.warmachine.league.model.LeagueStats;
+import com.sbowling.warmachine.war.calibration.model.MetricCalibration;
+import com.sbowling.warmachine.player.model.PlayerStats;
 import com.sbowling.warmachine.player.service.PlayerService;
-import com.sbowling.warmachine.war.batting.BattingMetric;
-import com.sbowling.warmachine.war.batting.BattingMetricRegistry;
-import com.sbowling.warmachine.war.batting.BattingRunsCalculator;
-import com.sbowling.warmachine.war.batting.impl.BattingAverage;
+import com.sbowling.warmachine.war.batting.metric.BattingMetric;
+import com.sbowling.warmachine.war.batting.metric.BattingMetricRegistry;
+import com.sbowling.warmachine.war.batting.metric.BattingRunsCalculator;
+import com.sbowling.warmachine.war.batting.metric.impl.BattingAverage;
 import java.util.Map;
+
+import com.sbowling.warmachine.war.batting.service.BattingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

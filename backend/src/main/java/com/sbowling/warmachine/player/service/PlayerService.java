@@ -1,10 +1,10 @@
 package com.sbowling.warmachine.player.service;
 
-import com.sbowling.warmachine.mlb.MlbApiClient;
-import com.sbowling.warmachine.mlb.MlbStatsMapper;
-import com.sbowling.warmachine.mlb.dto.MlbPlayerResponseDto;
-import com.sbowling.warmachine.mlb.dto.MlbPlayersResponseDto;
-import com.sbowling.warmachine.model.PlayerStats;
+import com.sbowling.warmachine.api.mlb.MlbApiClient;
+import com.sbowling.warmachine.api.mlb.MlbStatsMapper;
+import com.sbowling.warmachine.api.mlb.dto.MlbPlayerResponseDto;
+import com.sbowling.warmachine.api.mlb.dto.MlbPlayersResponseDto;
+import com.sbowling.warmachine.player.model.PlayerStats;
 import com.sbowling.warmachine.player.dto.PlayerSummaryDto;
 import com.sbowling.warmachine.player.mapper.PlayerMapper;
 import java.util.List;

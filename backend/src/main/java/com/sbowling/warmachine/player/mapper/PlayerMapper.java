@@ -1,6 +1,6 @@
 package com.sbowling.warmachine.player.mapper;
 
-import com.sbowling.warmachine.mlb.dto.MlbPlayersResponseDto;
+import com.sbowling.warmachine.api.mlb.dto.MlbPlayersResponseDto;
 import com.sbowling.warmachine.player.dto.PlayerSummaryDto;
 import java.util.List;
 import org.springframework.stereotype.Component;
