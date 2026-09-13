@@ -1,7 +1,7 @@
 package com.sbowling.warmachine.war.calibration.service;
 
 import com.sbowling.warmachine.api.mlb.MlbApiClient;
-import com.sbowling.warmachine.api.mlb.MlbStatsMapper;
+import com.sbowling.warmachine.api.mlb.mapper.MlbStatsMapper;
 import com.sbowling.warmachine.api.mlb.dto.MlbStatsResponseDto;
 import com.sbowling.warmachine.war.calibration.LinearRegression;
 import com.sbowling.warmachine.war.calibration.model.MetricCalibration;

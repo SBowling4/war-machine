@@ -1,4 +1,4 @@
-package com.sbowling.warmachine.api.mlb;
+package com.sbowling.warmachine.api.mlb.mapper;
 
 import com.sbowling.warmachine.api.mlb.dto.MlbStatsResponseDto;
 import com.sbowling.warmachine.player.model.PlayerStats;
