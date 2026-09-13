@@ -3,23 +3,28 @@ package com.sbowling.warmachine.war.calibration.service;
 import com.sbowling.warmachine.api.mlb.MlbApiClient;
 import com.sbowling.warmachine.api.mlb.mapper.MlbStatsMapper;
 import com.sbowling.warmachine.api.mlb.dto.MlbStatsResponseDto;
+import com.sbowling.warmachine.player.model.PlayerStats;
 import com.sbowling.warmachine.war.calibration.LinearRegression;
 import com.sbowling.warmachine.war.calibration.model.MetricCalibration;
 import com.sbowling.warmachine.war.batting.metric.BattingMetric;
 import com.sbowling.warmachine.war.repository.MetricCalibrationRepository;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MetricCalibrationService {
+  private static final int TRAILING_SEASONS = 5;
+
   private final MetricCalibrationRepository repository;
   private final MlbApiClient mlbApiClient;
   private final MlbStatsMapper mlbStatsMapper;
 
   public MetricCalibrationService(
-      MetricCalibrationRepository repository,
-      MlbApiClient mlbApiClient,
-      MlbStatsMapper mlbStatsMapper) {
+          MetricCalibrationRepository repository,
+          MlbApiClient mlbApiClient,
+          MlbStatsMapper mlbStatsMapper) {
     this.repository = repository;
     this.mlbApiClient = mlbApiClient;
     this.mlbStatsMapper = mlbStatsMapper;
@@ -27,46 +32,45 @@ public class MetricCalibrationService {
 
   public MetricCalibration getCalibration(int season, BattingMetric metric) {
     return repository
-        .findBySeasonAndMetricAbbreviation(season, metric.getAbbreviation())
-        .orElseGet(() -> calculateAndSave(season, metric));
+            .findBySeasonAndMetricAbbreviation(season, metric.getAbbreviation())
+            .orElseGet(() -> calculateAndSave(season, metric));
   }
 
   private MetricCalibration calculateAndSave(int season, BattingMetric metric) {
-    MlbStatsResponseDto response = mlbApiClient.getLeagueHittingStats(season);
-    double scale = calculateScale(response, metric);
+    List<PlayerStats> teamSeasons = fetchTrailingTeamSeasons(season);
+    double scale = calculateScale(teamSeasons, metric);
 
     MetricCalibration calibration = new MetricCalibration(season, metric.getAbbreviation(), scale);
-
     return repository.save(calibration);
   }
 
-  private double calculateScale(MlbStatsResponseDto response, BattingMetric metric) {
-    List<MlbStatsResponseDto.Split> splits = response.stats().getFirst().splits();
+  private List<PlayerStats> fetchTrailingTeamSeasons(int season) {
+    List<PlayerStats> pooled = new ArrayList<>();
 
-    double[] x = new double[splits.size()];
-    double[] y = new double[splits.size()];
-
-    int validPlayers = 0;
-
-    for (MlbStatsResponseDto.Split split : splits) {
-      MlbStatsResponseDto.Stat stat = split.stat();
-
-      if (stat.plateAppearances() == 0) {
-        continue;
-      }
-
-      x[validPlayers] = metric.calculate(mlbStatsMapper.toPlayerStats(split));
-
-      y[validPlayers] = (double) stat.runs() / stat.plateAppearances();
-
-      validPlayers++;
+    for (int year = season - TRAILING_SEASONS + 1; year <= season; year++) {
+      MlbStatsResponseDto response = mlbApiClient.getTeamHittingStats(year);
+      pooled.addAll(mlbStatsMapper.toPlayerStatsList(response));
     }
 
-    double[] validX = new double[validPlayers];
-    double[] validY = new double[validPlayers];
+    return pooled;
+  }
 
-    System.arraycopy(x, 0, validX, 0, validPlayers);
-    System.arraycopy(y, 0, validY, 0, validPlayers);
+  private double calculateScale(List<PlayerStats> teamSeasons, BattingMetric metric) {
+    double[] x = new double[teamSeasons.size()];
+    double[] y = new double[teamSeasons.size()];
+
+    int validTeamSeasons = 0;
+
+    for (PlayerStats teamSeason : teamSeasons) {
+      if (teamSeason.plateAppearances() == 0) continue;
+
+      x[validTeamSeasons] = metric.calculate(teamSeason);
+      y[validTeamSeasons] = (double) teamSeason.runs() / teamSeason.plateAppearances();
+      validTeamSeasons++;
+    }
+
+    double[] validX = Arrays.copyOf(x, validTeamSeasons);
+    double[] validY = Arrays.copyOf(y, validTeamSeasons);
 
     LinearRegression regression = LinearRegression.calculate(validX, validY);
 

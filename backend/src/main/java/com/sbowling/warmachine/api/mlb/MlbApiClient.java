@@ -106,4 +106,21 @@ public class MlbApiClient {
             .retrieve()
             .body(MlbPlayersResponseDto.class);
   }
+
+  public MlbStatsResponseDto getTeamHittingStats(int season) {
+    return restClient
+            .get()
+            .uri(
+                    uriBuilder ->
+                            uriBuilder
+                                    .path("/teams/stats")
+                                    .queryParam("season", season)
+                                    .queryParam("sportId", 1)
+                                    .queryParam("group", "hitting")
+                                    .queryParam("stats", "season")
+                                    .queryParam("gameType", "R")
+                                    .build())
+            .retrieve()
+            .body(MlbStatsResponseDto.class);
+  }
 }

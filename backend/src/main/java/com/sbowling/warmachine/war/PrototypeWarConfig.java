@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrototypeWarConfig {
     private final double runsPerWin = 10.0;
-    private final double replacementRunsPerGame = .294;
+    private final double replacementRunsBelowAveragePer600Pa = 20.0;
 
-    public double getReplacementRunsPerGame() {
-        return replacementRunsPerGame;
+    public double getReplacementRunsPerPlateAppearance() {
+        return replacementRunsBelowAveragePer600Pa / 600.0;
     }
 
     public double getRunsPerWin() {
