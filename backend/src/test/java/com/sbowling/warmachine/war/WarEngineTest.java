@@ -51,22 +51,10 @@ public class WarEngineTest {
         assertEquals(0.0, result.baserunningRuns(), 0.000001);
         assertEquals(0.0, result.fieldingRuns(), 0.000001);
 
-        assertEquals(
-                100 * 0.294,
-                result.replacementRuns(),
-                0.000001
-        );
+        // 600 PA * (20 runs / 600 PA) = 20.0 — the corrected replacement-level constant
+        assertEquals(20.0, result.replacementRuns(), 0.000001);
 
-        assertEquals(
-                24.0 + (100 * 0.294),
-                result.runsAboveReplacement(),
-                0.000001
-        );
-
-        assertEquals(
-                (24.0 + (100 * 0.294)) / 10.0,
-                result.war(),
-                0.000001
-        );
+        assertEquals(24.0 + 20.0, result.runsAboveReplacement(), 0.000001);
+        assertEquals((24.0 + 20.0) / 10.0, result.war(), 0.000001);
     }
 }

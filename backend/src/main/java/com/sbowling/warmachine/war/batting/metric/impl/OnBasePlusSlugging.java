@@ -37,6 +37,6 @@ public class OnBasePlusSlugging implements BattingMetric {
 
   @Override
   public double getOpportunity(PlayerStats stats) {
-    return 0; // TODO: idk what to put here
+    return stats.plateAppearances();
   }
 }

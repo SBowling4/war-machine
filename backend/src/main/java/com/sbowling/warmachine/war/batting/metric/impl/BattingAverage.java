@@ -18,9 +18,9 @@ public class BattingAverage implements BattingMetric {
 
   @Override
   public double calculate(PlayerStats stats) {
-    if (stats.plateAppearances() == 0) return 0.0;
+    if (stats.atBats() == 0) return 0.0;
 
-    return (double) stats.hits() / stats.plateAppearances();
+    return (double) stats.hits() / stats.atBats();
   }
 
   @Override

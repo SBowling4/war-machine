@@ -4,6 +4,8 @@ import com.sbowling.warmachine.war.dto.WarResponseDto;
 import com.sbowling.warmachine.war.service.WarService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/war")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -26,5 +28,12 @@ public class WarController {
                 season,
                 metric
         );
+    }
+
+    @GetMapping("/compare")
+    public List<WarResponseDto> compareMetrics(
+            @RequestParam int playerId,
+            @RequestParam int season) {
+        return warService.compareMetrics(playerId, season);
     }
 }

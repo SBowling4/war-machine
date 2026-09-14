@@ -17,4 +17,8 @@ public record PlayerStats(
     int sacrificeBunts,
     int sacrificeFlies,
     int runs,
-    int rbi) {}
+    int rbi) {
+    public int singles() {
+        return hits - doubles - triples - homeRuns;
+    }
+}

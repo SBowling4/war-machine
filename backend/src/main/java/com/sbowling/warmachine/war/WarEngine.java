@@ -23,7 +23,7 @@ public class WarEngine {
         double battingRuns = battingRunsCalculator.calculate(player, league, metric, calibration);
         double baserunningRuns = 0.0; // Placeholder for baserunning runs calculation
         double fieldingRuns = 0.0; // Placeholder for fielding runs calculation
-        double replacementRuns = player.gamesPlayed() * config.getReplacementRunsPerPlateAppearance();
+        double replacementRuns = player.plateAppearances() * config.getReplacementRunsPerPlateAppearance();
 
         double runsAboveReplacement = battingRuns + baserunningRuns + fieldingRuns + replacementRuns;
         double war = runsAboveReplacement / config.getRunsPerWin();

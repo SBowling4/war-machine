@@ -13,6 +13,8 @@ import com.sbowling.warmachine.war.dto.WarResponseDto;
 import com.sbowling.warmachine.war.mapper.WarResultMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WarService {
 
@@ -66,5 +68,11 @@ public class WarService {
                 );
 
         return warResultMapper.toDto(result, playerId, season, battingMetric.getAbbreviation());
+    }
+
+    public List<WarResponseDto> compareMetrics(int playerId, int season) {
+        return metricRegistry.getAllMetrics().stream()
+                .map(metric -> calculateWar(playerId, season, metric.getAbbreviation()))
+                .toList();
     }
 }

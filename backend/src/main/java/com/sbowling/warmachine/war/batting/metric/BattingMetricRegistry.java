@@ -17,4 +17,8 @@ public class BattingMetricRegistry {
         .findFirst()
         .orElseThrow(() -> new IllegalArgumentException("Metric not found: " + abbreviation));
   }
+
+  public List<BattingMetric> getAllMetrics() {
+    return metrics;
+  }
 }
